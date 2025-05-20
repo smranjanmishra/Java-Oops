@@ -1,122 +1,107 @@
-## Java OOP Concepts
-This README provides a concise overview of Object-Oriented Programming (OOP) concepts in Java, with examples for beginners and intermediate learners. Topics include objects, classes, access modifiers, encapsulation, constructors, inheritance, polymorphism, packages, abstraction, and keywords like static and super.
+# Java Object-Oriented Programming Concepts
 
 ## Table of Contents
+- [Introduction to OOP](#introduction-to-oop)
+- [Access Modifiers](#access-modifiers)
+- [Getters and Setters](#getters-and-setters)
+- [Encapsulation](#encapsulation)
+- [Constructors](#constructors)
+  - [Types of Constructors](#types-of-constructors)
+  - [Copy Constructor](#copy-constructor)
+  - [Shallow vs Deep Copy](#shallow-vs-deep-copy)
+- [Inheritance](#inheritance)
+  - [Types of Inheritance](#types-of-inheritance)
+- [Polymorphism](#polymorphism)
+  - [Method Overloading](#method-overloading)
+  - [Method Overriding](#method-overriding)
+- [Packages](#packages)
+- [Abstraction](#abstraction)
+  - [Abstract Classes](#abstract-classes)
+  - [Interfaces](#interfaces)
+- [Static Keyword](#static-keyword)
+- [Super Keyword](#super-keyword)
 
-Objects and Classes </br>
-Access Modifiers </br>
-Encapsulation </br>
-Constructors </br>
-Destructors </br>
-Inheritance </br>
-Polymorphism </br>
-Packages </br>
-Abstraction </br>
-Static Keyword </br>
-Super Keyword </br>
+## Introduction to OOP
 
+**Objects:** Entities in the real world  
+**Classes:** Groups of these entities
 
-## Objects and Classes
+> **Note:** A class is a blueprint from which objects are created.
 
-Objects : Entities in the real world
-Classes : Group of these Entities
+**Class Structure:** Attributes (Properties) + Functions (Behaviors)  
+Objects are stored in heap memory.
 
-Note : Class is a blueprint from Objects are getting created.
+## Access Modifiers
 
-Class : Attributes(Properties) + Functions(Behaviours)
-        Objects are stored on Heap memory.
+Access modifiers are keywords that define the accessibility of a class and its members.
 
-## Note: Objects are stored in heap memory.
+| Modifier | Class | Package | Subclass | World |
+|----------|-------|---------|----------|-------|
+| public | ✓ | ✓ | ✓ | ✓ |
+| protected | ✓ | ✓ | ✓ | ✗ |
+| default | ✓ | ✓ | ✗ | ✗ |
+| private | ✓ | ✗ | ✗ | ✗ |
+
+## Getters and Setters
+
+- **Get:** To return the value
+- **Set:** To modify the value
+- **this:** Keyword used to refer to the current object
+
+## Encapsulation
+
+It is the process of binding or wrapping data along with its data holders (through Getter and Setter methods) known as Encapsulation.
+
+## Constructors
+
+- A special method in Java
+- Constructor name is always the same as the class name
+- It does not have a return type
+- Used for initialization and object creation
+- Constructors are only called once at object creation
+- Memory allocation happens when a constructor is called
+
+**Example:**
+
+```java
+public class Constructor {
+    public static void main(String[] args) {
+        Student s1 = new Student();
+    }
+}
 
 class Student {
     String name;
     int roll;
 
-    void display() {
-        System.out.println("Name: " + name + ", Roll: " + roll);
-    }
-}
-
-
-## Access Modifiers
-Access modifiers are keywords which define the accessibility of a class and its members.
-</br>
-Public: Accessible everywhere.
-Protected: Accessible in the same package and subclasses.
-Default (no modifier): Accessible in the same package.
-Private: Accessible only within the class.
-
-class Student {
-    private String name;
-    public int roll;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name; // 'this' refers to current object
-    }
-}
-
-
-## Encapsulation
-It is the process of binding or wrapping of data along with it's data holders that is through Getter and Setter is known as Encapsulation.
-</br>
-
-Purpose: Protect data and expose only necessary functionality.
-Implementation: Use private fields with public getter/setter methods.
-
-Ex:
-class Student {
-    private String name;
-    private int age;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
+    Student(String name) {
         this.name = name;
     }
 }
+```
 
+### Types of Constructors
 
-## Constructors
-- It is a special method in Java.
-- The constructor name is always the same as the class name.
-- It does not have a return type.
-- It is used for initialization and object creation.
-- Constructors are only called once at object creation.
-- Memory allocation happens when the constructor is called.
+1. **Non-Parameterized Constructor**
+2. **Parameterized Constructor**
 
+**Example:**
 
-## Types
-- Non-Parameterized: Sets default values.
-- Parameterized: Initializes with specific values.
-- Copy Constructor: Copies data from an existing object.
-
-Ex :
+```java
 class Student {
     String name;
     int age;
 
-    // Non-Parameterized
+    // Non-parameterized constructor
     Student() {
         name = "Unknown";
         age = 0;
     }
 
-    // Parameterized
-    Student(String name, int age) {
-        this.name = name;
-        this.age = age;
-    }
-
-    // Copy Constructor
-    Student(Student s) {
-        this.name = s.name;
-        this.age = s.age;
+    // Parameterized constructor
+    Student(String n, int a) {
+        name = n;
+        age = a;
     }
 
     void display() {
@@ -126,219 +111,297 @@ class Student {
     public static void main(String[] args) {
         Student s1 = new Student();
         Student s2 = new Student("Soumya", 24);
-        Student s3 = new Student(s2);
-        s1.display(); // Unknown 0
-        s2.display(); // Soumya 24
-        s3.display(); // Soumya 24
+        s1.display();
+        s2.display();
     }
 }
+```
 
-## Copy Types
+### Copy Constructor
 
-- Shallow Copy: Copies references (changes affect both objects).
-- Deep Copy: Duplicates data (independent objects).
-- Lazy Copy: Delays copying until modification, combining shallow and deep copy.
+A copy constructor creates a new object by copying the data from an existing object of the same class.
 
-Ex :
+**Example:**
+
+```java
 class Student {
     String name;
-    int[] marks;
+    int age;
 
-    // Shallow Copy
-    Student(Student s) {
-        this.name = s.name;
-        this.marks = s.marks; // Reference copy
+    Student(String n, int a) {
+        name = n;
+        age = a;
     }
 
-    // Deep Copy
-    Student(Student s, boolean deep) {
-        this.name = s.name;
-        this.marks = new int[s.marks.length];
-        for (int i = 0; i < s.marks.length; i++) {
-            this.marks[i] = s.marks[i]; // Value copy
-        }
+    Student(Student s) {
+        name = s.name;
+        age = s.age;
+    }
+
+    void display() {
+        System.out.println(name + " " + age);
+    }
+
+    public static void main(String[] args) {
+        Student s1 = new Student("Soumya", 24);
+        Student s2 = new Student(s1);
+        s2.display();
     }
 }
+```
 
+### Shallow vs Deep Copy
 
-## Destructors
-Java does not use explicit destructors. The Garbage Collector automatically manages memory by deallocating unused objects.
+#### Shallow Copy
+Only copies references, not the actual objects.
+
+```java
+Student(Student s1) {
+    marks = new int[3];
+    this.name = s1.name;
+    this.roll = s1.roll;
+    this.marks = s1.marks;  // Only copies the reference
+}
+```
+
+#### Deep Copy
+Duplicates everything, including the objects being referenced.
+
+```java
+Student(Student s1) {
+    marks = new int[3];
+    this.name = s1.name;
+    this.roll = s1.roll;
+    for(int i = 0; i < marks.length; i++) {
+        this.marks[i] = s1.marks[i];  // Copies each element
+    }
+}
+```
+
+#### Lazy Copy
+Delays copying until a modification is needed. Initially shares the reference (like shallow copy) but creates a deep copy only when one object changes.
+
+### Destructors
+We do not use destructors in Java because Java has Garbage Collection.
 
 ## Inheritance
-Inheritance allows a class to inherit properties and methods from another class.
 
-Types :
+- Acquiring the properties of one class into another class is known as Inheritance.
 
-- Single Level: One class inherits from another.
-- Multilevel: A chain of inheritance (e.g., C → B → A).
-- Hierarchical: Multiple classes inherit from one parent.
-- Hybrid: Combines hierarchical and multiple inheritance (via interfaces).
-- Multiple: Achieved using interfaces (Java doesn't support multiple class inheritance).
+### Types of Inheritance
 
-Ex :
-## Single Level :
+Java supports 5 types of inheritance:
+
+1. **Single Level**
+2. **Multilevel**
+3. **Hierarchical**
+4. **Hybrid (using interfaces)**
+5. **Multiple (using interfaces)**
+
+#### 1. Single Level Inheritance
+
+```java
 class A {
     void show() {
         System.out.println("A");
     }
 }
+
 class B extends A {
     void display() {
         System.out.println("B");
     }
 }
+
 public class Main {
     public static void main(String[] args) {
-        B b=new B();
+        B b = new B();
         b.show();
         b.display();
     }
 }
+```
 
-## Multilevel :
+#### 2. Multilevel Inheritance
+
+```java
 class A {
     void show() {
         System.out.println("A");
     }
 }
+
 class B extends A {
     void display() {
         System.out.println("B");
     }
 }
+
 class C extends B {
     void print() {
         System.out.println("C");
     }
 }
+
 public class Main {
     public static void main(String[] args) {
-        C c=new C();
+        C c = new C();
         c.show();
         c.display();
         c.print();
     }
 }
+```
 
+#### 3. Hierarchical Inheritance
 
-## Hierarchical :
+```java
 class A {
     void show() {
         System.out.println("A");
     }
 }
+
 class B extends A {
     void display() {
         System.out.println("B");
     }
 }
+
 class C extends A {
     void print() {
         System.out.println("C");
     }
 }
+
 public class Main {
     public static void main(String[] args) {
-        B b=new B();
-        C c=new C();
+        B b = new B();
+        C c = new C();
         b.show();
         b.display();
         c.show();
         c.print();
     }
 }
+```
 
+#### 4. Hybrid Inheritance (using interface)
 
-## Hybrid (using interface) :
+```java
 interface A {
     void show();
 }
+
 class B {
     void display() {
         System.out.println("B");
     }
 }
+
 class C extends B implements A {
     public void show() {
         System.out.println("A");
     }
+    
     void print() {
         System.out.println("C");
     }
 }
+
 public class Main {
     public static void main(String[] args) {
-        C c=new C();
+        C c = new C();
         c.show();
         c.display();
         c.print();
     }
 }
+```
 
-## Multiple (using interfaces) :
+#### 5. Multiple Inheritance (using interfaces)
+
+```java
 interface A {
     void show();
 }
+
 interface B {
     void display();
 }
-class C implements A,B {
+
+class C implements A, B {
     public void show() {
         System.out.println("A");
     }
+    
     public void display() {
         System.out.println("B");
     }
 }
+
 public class Main {
     public static void main(String[] args) {
-        C c=new C();
+        C c = new C();
         c.show();
         c.display();
     }
 }
-
+```
 
 ## Polymorphism
-- Poly means many, and Morph means froms.
-- There are 2 types of Polymorphism.
-            1 - Compile-time Polymorphism (Method Overloading) (static)
-            2 - Runtime Polymorphism (Method Overriding) (dynamic)
 
-## 1. Compile-Time (Method Overloading)
-- Same method name, different parameters in a single class.
-- Resolved at compile time.
+- "Poly" means many and "Morph" means forms
+- There are 2 types of Polymorphism:
+  1. Compile-time Polymorphism (Method Overloading) - static
+  2. Runtime Polymorphism (Method Overriding) - dynamic
 
-Ex :
+### Method Overloading
+
+In a single class, multiple functions with the same name but different parameters is called Method Overloading.
+
+**Example:**
+
+```java
+public class MethodOverloading {
+    public static void main(String[] args) {
+        Calculator calc = new Calculator();
+        System.out.println(calc.sum(1, 2));
+        System.out.println(calc.sum((float)1.5, (float)2.5));
+        System.out.println(calc.sum(1, 2, 3));
+    }
+}
+
 class Calculator {
     int sum(int a, int b) {
         return a + b;
     }
-
+    
     float sum(float a, float b) {
         return a + b;
     }
-
+    
     int sum(int a, int b, int c) {
         return a + b + c;
     }
 }
+```
 
-public class Main {
+### Method Overriding
+
+- In two different classes having the same method name and same parameters is called Method Overriding
+- Parent and child classes both contain the same function with a different definition
+
+**Example:**
+
+```java
+public class Oops {
     public static void main(String[] args) {
-        Calculator calc = new Calculator();
-        System.out.println(calc.sum(1, 2)); // 3
-        System.out.println(calc.sum(1.5f, 2.5f)); // 4.0
-        System.out.println(calc.sum(1, 2, 3)); // 6
+        Deer d = new Deer();
+        d.eat();
     }
 }
 
-## 2. Runtime (Method Overriding)
-
-Child class redefines a parent class method with the same signature.
-Resolved at runtime.
-
-Ex :
 class Animal {
     void eat() {
         System.out.println("Eats Anything");
@@ -347,145 +410,45 @@ class Animal {
 
 class Deer extends Animal {
     void eat() {
-        System.out.println("Eats Grass");
+        System.out.println("Eats grass");
     }
 }
-
-public class Main {
-    public static void main(String[] args) {
-        Deer d = new Deer();
-        d.eat(); // Eats Grass
-    }
-}
-
+```
 
 ## Packages
-Packages group-related classes, interfaces, and sub-packages for organization to avoid naming conflicts.
 
-
-Ex :
-package com.example;
-public class MyClass {
-    public static void main(String[] args) {
-        System.out.println("Inside com.example package");
-    }
-}
-
+Packages are groups of similar types of classes, interfaces, and sub-packages.
 
 ## Abstraction
-- Hiding all the unnecessary details and showing only the important parts to the user.
-- It is of 2 types. (1)Abstract class (2)Interfaces
 
-## 1. Abstract Classes
-- Cannot be instantiated.
-- Can have abstract (no body) and non-abstract methods.
-- Can include constructors.
+- Hiding all the unnecessary details and showing only the important parts to the user
+- It is of 2 types:
+  1. Abstract classes
+  2. Interfaces
 
-Ex :
-abstract class Animal {
-    abstract void sound();
+### Abstract Classes
 
-    void sleep() {
-        System.out.println("Sleeping...");
-    }
-}
+- Cannot create an instance of an abstract class
+- Can have abstract and non-abstract methods
+- Can have constructors
 
-class Dog extends Animal {
-    void sound() {
-        System.out.println("Bark");
-    }
-}
+### Interfaces
 
-public class Main {
-    public static void main(String[] args) {
-        Dog d = new Dog();
-        d.sound(); // Bark
-        d.sleep(); // Sleeping...
-    }
-}
-
-## 2. Interfaces
-- Blueprint for classes, enforcing total abstraction.
-- Methods are public, abstract by default.
-- Variables are public, static, final.
-- Supports multiple inheritance.
-
-Ex :
-interface Animal {
-    void sound();
-}
-
-class Dog implements Animal {
-    public void sound() {
-        System.out.println("Bark");
-    }
-}
-
-public class Main {
-    public static void main(String[] args) {
-        Dog d = new Dog();
-        d.sound(); // Bark
-    }
-}
-
+- Interface is a blueprint of a class
+- Implements multiple inheritance
+- Used to achieve total abstraction
+- All methods are public, abstract, and without implementation
+- Variables in the interface are final, public, and static
 
 ## Static Keyword
-- The static keyword makes variables, methods, blocks, or nested classes belong to the class, not instances.
 
-Ex :
-class Student {
-    static int count = 0;
-
-    Student() {
-        count++;
-    }
-
-    static void showCount() {
-        System.out.println("Total Students: " + count);
-    }
-}
-
-public class Main {
-    public static void main(String[] args) {
-        Student s1 = new Student();
-        Student s2 = new Student();
-        Student.showCount(); // Total Students: 2
-    }
-}
-
+- Static keyword in Java is used to share the same variable or method across all instances of a given class
+- We can make static: properties, functions, blocks, nested classes
 
 ## Super Keyword
-- The super keyword refers to the immediate parent class. It is used to: (1) Access parent class fields.
-                                                                         (2) Call parent class methods.
-                                                                         (3) Invoke parent class constructors.
 
-
-Ex :
-class Animal {
-    String name = "Animal";
-
-    void eat() {
-        System.out.println("Eating...");
-    }
-}
-
-class Dog extends Animal {
-    String name = "Dog";
-
-    Dog() {
-        super(); // Calls parent constructor
-    }
-
-    void display() {
-        System.out.println("Child: " + name); // Dog
-        System.out.println("Parent: " + super.name); // Animal
-        super.eat(); // Eating...
-    }
-}
-
-public class Main {
-    public static void main(String[] args) {
-        Dog d = new Dog();
-        d.display();
-    }
-}
+- Super keyword is used to refer to the immediate parent class object
+- Basically, it is used for:
+  1. To access parent's properties
+  2. To access parent's functions
+  3. To access parent's constructor
