@@ -3,24 +3,28 @@ This README provides a concise overview of Object-Oriented Programming (OOP) con
 
 ## Table of Contents
 
-Objects and Classes
-</br>
-Access Modifiers
-Encapsulation
-Constructors
-Destructors
-Inheritance
-Polymorphism
-Packages
-Abstraction
-Static Keyword
-Super Keyword
+Objects and Classes </br>
+Access Modifiers </br>
+Encapsulation </br>
+Constructors </br>
+Destructors </br>
+Inheritance </br>
+Polymorphism </br>
+Packages </br>
+Abstraction </br>
+Static Keyword </br>
+Super Keyword </br>
 
 
 ## Objects and Classes
 
-Objects: Real-world entities with attributes and behaviors (e.g., a student).
-Classes: Blueprints for creating objects, defining attributes (fields) and methods (behaviors).
+Objects : Entities in the real world
+Classes : Group of these Entities
+
+Note : Class is a blueprint from Objects are getting created.
+
+Class : Attributes(Properties) + Functions(Behaviours)
+        Objects are stored on Heap memory.
 
 ## Note: Objects are stored in heap memory.
 
