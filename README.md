@@ -51,6 +51,23 @@ Access modifiers are keywords that define the accessibility of a class and its m
 ## Encapsulation
 
 It is the process of binding or wrapping data along with its data holders (through Getter and Setter methods) known as Encapsulation.
+- **Purpose:** Protect data and expose only necessary functionality.
+- **Implementation:** Use private fields with public getter/setter methods.
+
+```java
+  class Student {
+    private String name;
+    private int age;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+```
 
 ## Constructors
 
