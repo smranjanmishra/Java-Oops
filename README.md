@@ -39,12 +39,12 @@ class Student {
 
 
 ## Access Modifiers
-Control the accessibility of classes and their members:
-
-public: Accessible everywhere.
-protected: Accessible in the same package and subclasses.
-default (no modifier): Accessible in the same package.
-private: Accessible only within the class.
+Access modifiers are keywords which define the accessibility of a class and its members.
+</br>
+Public: Accessible everywhere.
+Protected: Accessible in the same package and subclasses.
+Default (no modifier): Accessible in the same package.
+Private: Accessible only within the class.
 
 class Student {
     private String name;
@@ -61,11 +61,13 @@ class Student {
 
 
 ## Encapsulation
-Encapsulation wraps data and methods together, restricting access to fields via getters and setters.
+It is the process of binding or wrapping of data along with it's data holders that is through Getter and Setter is known as Encapsulation.
+</br>
 
 Purpose: Protect data and expose only necessary functionality.
 Implementation: Use private fields with public getter/setter methods.
 
+Ex:
 class Student {
     private String name;
     private int age;
@@ -81,13 +83,20 @@ class Student {
 
 
 ## Constructors
-Constructors initialize objects. They have the same name as the class, no return type, and are called once during object creation.
+- It is a special method in Java.
+- The constructor name is always the same as the class name.
+- It does not have a return type.
+- It is used for initialization and object creation.
+- Constructors are only called once at object creation.
+- Memory allocation happens when the constructor is called.
+
 
 ## Types
-Non-Parameterized: Sets default values.
-Parameterized: Initializes with specific values.
-Copy Constructor: Copies data from an existing object.
+- Non-Parameterized: Sets default values.
+- Parameterized: Initializes with specific values.
+- Copy Constructor: Copies data from an existing object.
 
+Ex :
 class Student {
     String name;
     int age;
@@ -126,10 +135,11 @@ class Student {
 
 ## Copy Types
 
-Shallow Copy: Copies references (changes affect both objects).
-Deep Copy: Duplicates data (independent objects).
-Lazy Copy: Delays copying until modification, combining shallow and deep copy.
+- Shallow Copy: Copies references (changes affect both objects).
+- Deep Copy: Duplicates data (independent objects).
+- Lazy Copy: Delays copying until modification, combining shallow and deep copy.
 
+Ex :
 class Student {
     String name;
     int[] marks;
@@ -159,68 +169,147 @@ Inheritance allows a class to inherit properties and methods from another class.
 
 Types :
 
-Single Level: One class inherits another.
-Multilevel: A chain of inheritance (e.g., C → B → A).
-Hierarchical: Multiple classes inherit from one parent.
-Hybrid: Combines hierarchical and multiple inheritance (via interfaces).
-Multiple: Achieved using interfaces (Java doesn't support multiple class inheritance).
+- Single Level: One class inherits from another.
+- Multilevel: A chain of inheritance (e.g., C → B → A).
+- Hierarchical: Multiple classes inherit from one parent.
+- Hybrid: Combines hierarchical and multiple inheritance (via interfaces).
+- Multiple: Achieved using interfaces (Java doesn't support multiple class inheritance).
 
-## Single Level
+Ex :
+## Single Level :
 class A {
     void show() {
         System.out.println("A");
     }
 }
-
 class B extends A {
     void display() {
         System.out.println("B");
     }
 }
-
 public class Main {
     public static void main(String[] args) {
-        B b = new B();
-        b.show(); // A
-        b.display(); // B
+        B b=new B();
+        b.show();
+        b.display();
     }
 }
 
-## Multiple Inheritance (Interfaces)
+## Multilevel :
+class A {
+    void show() {
+        System.out.println("A");
+    }
+}
+class B extends A {
+    void display() {
+        System.out.println("B");
+    }
+}
+class C extends B {
+    void print() {
+        System.out.println("C");
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        C c=new C();
+        c.show();
+        c.display();
+        c.print();
+    }
+}
+
+
+## Hierarchical :
+class A {
+    void show() {
+        System.out.println("A");
+    }
+}
+class B extends A {
+    void display() {
+        System.out.println("B");
+    }
+}
+class C extends A {
+    void print() {
+        System.out.println("C");
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        B b=new B();
+        C c=new C();
+        b.show();
+        b.display();
+        c.show();
+        c.print();
+    }
+}
+
+
+## Hybrid (using interface) :
 interface A {
     void show();
 }
-
-interface B {
-    void display();
+class B {
+    void display() {
+        System.out.println("B");
+    }
 }
-
-class C implements A, B {
+class C extends B implements A {
     public void show() {
         System.out.println("A");
     }
+    void print() {
+        System.out.println("C");
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        C c=new C();
+        c.show();
+        c.display();
+        c.print();
+    }
+}
 
+## Multiple (using interfaces) :
+interface A {
+    void show();
+}
+interface B {
+    void display();
+}
+class C implements A,B {
+    public void show() {
+        System.out.println("A");
+    }
     public void display() {
         System.out.println("B");
     }
 }
-
 public class Main {
     public static void main(String[] args) {
-        C c = new C();
-        c.show(); // A
-        c.display(); // B
+        C c=new C();
+        c.show();
+        c.display();
     }
 }
 
 
 ## Polymorphism
-Polymorphism allows methods to take multiple forms.
+- Poly means many, and Morph means froms.
+- There are 2 types of Polymorphism.
+            1 - Compile-time Polymorphism (Method Overloading) (static)
+            2 - Runtime Polymorphism (Method Overriding) (dynamic)
+
 ## 1. Compile-Time (Method Overloading)
+- Same method name, different parameters in a single class.
+- Resolved at compile time.
 
-Same method name, different parameters in a single class.
-Resolved at compile time.
-
+Ex :
 class Calculator {
     int sum(int a, int b) {
         return a + b;
@@ -249,6 +338,7 @@ public class Main {
 Child class redefines a parent class method with the same signature.
 Resolved at runtime.
 
+Ex :
 class Animal {
     void eat() {
         System.out.println("Eats Anything");
@@ -270,9 +360,11 @@ public class Main {
 
 
 ## Packages
-Packages group related classes, interfaces, and sub-packages for organization and to avoid naming conflicts.
-package com.example;
+Packages group-related classes, interfaces, and sub-packages for organization to avoid naming conflicts.
 
+
+Ex :
+package com.example;
 public class MyClass {
     public static void main(String[] args) {
         System.out.println("Inside com.example package");
@@ -281,13 +373,15 @@ public class MyClass {
 
 
 ## Abstraction
-Abstraction hides unnecessary details and shows only essential features.
+- Hiding all the unnecessary details and showing only the important parts to the user.
+- It is of 2 types. (1)Abstract class (2)Interfaces
+
 ## 1. Abstract Classes
+- Cannot be instantiated.
+- Can have abstract (no body) and non-abstract methods.
+- Can include constructors.
 
-Cannot be instantiated.
-Can have abstract (no body) and non-abstract methods.
-Can include constructors.
-
+Ex :
 abstract class Animal {
     abstract void sound();
 
@@ -311,12 +405,12 @@ public class Main {
 }
 
 ## 2. Interfaces
+- Blueprint for classes, enforcing total abstraction.
+- Methods are public, abstract by default.
+- Variables are public, static, final.
+- Supports multiple inheritance.
 
-Blueprint for classes, enforcing total abstraction.
-Methods are public, abstract by default.
-Variables are public, static, final.
-Supports multiple inheritance.
-
+Ex :
 interface Animal {
     void sound();
 }
@@ -336,7 +430,9 @@ public class Main {
 
 
 ## Static Keyword
-The static keyword makes variables, methods, blocks, or nested classes belong to the class, not instances.
+- The static keyword makes variables, methods, blocks, or nested classes belong to the class, not instances.
+
+Ex :
 class Student {
     static int count = 0;
 
@@ -359,12 +455,12 @@ public class Main {
 
 
 ## Super Keyword
-The super keyword refers to the immediate parent class. It is used to:
+- The super keyword refers to the immediate parent class. It is used to: (1) Access parent class fields.
+                                                                         (2) Call parent class methods.
+                                                                         (3) Invoke parent class constructors.
 
-Access parent class fields.
-Call parent class methods.
-Invoke parent class constructors.
 
+Ex :
 class Animal {
     String name = "Animal";
 
@@ -393,9 +489,3 @@ public class Main {
         d.display();
     }
 }
-
-
-Resources
-
-Oracle Java Documentation
-Experiment with the code examples in your IDE to deepen your understanding!
