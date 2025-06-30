@@ -135,7 +135,6 @@ class Student {
 ```
 
 ### Copy Constructor
-
 A copy constructor creates a new object by copying the data from an existing object of the same class.
 
 **Example:**
